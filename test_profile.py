@@ -21,14 +21,33 @@ def testcase_03_05_06(driver):
         EC.presence_of_element_located((By.CLASS_NAME, "fa-times"))
     ).click()
 
-    # TC-03
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.LINK_TEXT, "MASUK/DAFTAR"))
     ).click()
 
+    #TC-04
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.NAME, "email"))
     ).send_keys("salsabillaputerisandiwardana@gmail.com")  
+
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.NAME, "password"))
+    ).send_keys("Salsa110099wrong") 
+
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "btn-primary"))
+    ).click()
+
+    time.sleep(1)
+    errorMessage = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "error"))
+    )
+    assert errorMessage is not None, "Should Fail to login"
+
+    # TC-03
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.NAME, "password"))
+    ).clear()
 
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.NAME, "password"))

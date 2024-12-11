@@ -13,7 +13,7 @@ def driver():
     yield driver  
     driver.quit()  
 
-def testcase_05(driver):
+def testcase_09(driver):
     # setup
     driver.get("https://www.nicetissue.id")  
     time.sleep(3)
@@ -37,7 +37,53 @@ def testcase_05(driver):
         EC.presence_of_element_located((By.CLASS_NAME, "btn-primary"))
     ).click()
     time.sleep(3)
-    #TC-08
+
+    # TC-08
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.LINK_TEXT, "NICE GEBYAR POIN"))
+    ).click()
+    time.sleep(1)
+
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "otp-field0"))
+    ).send_keys("0")  
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "otp-field1"))
+    ).send_keys("1")  
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "otp-field2"))
+    ).send_keys("2")  
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "otp-field3"))
+    ).send_keys("3") 
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "otp-field4"))
+    ).send_keys("4")   
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "otp-field5"))
+    ).send_keys("5") 
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "otp-field6"))
+    ).send_keys("6")   
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "otp-field7"))
+    ).send_keys("7")  
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "otp-field8"))
+    ).send_keys("8")  
+
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "btn-redeem"))
+    ).click()
+    
+    time.sleep(1)
+    errorMessage = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "error"))
+    )
+    assert errorMessage is not None, "Should Fail to login"
+
+
+    # TC-09
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.LINK_TEXT, "REDEEM"))
     ).click()
